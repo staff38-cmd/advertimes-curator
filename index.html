@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <meta name="apple-mobile-web-app-title" content="アドタイまとめ" />
+  <meta name="theme-color" content="#1e1b4b" />
+  <title>AdverTimes クリエイティブ＆マーケティング キュレーションハブ</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700;800&display=swap');
+    body {
+      font-family: 'Noto Sans JP', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+    .line-clamp-2 {
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-900 min-h-screen antialiased">
+  <!-- Header -->
+  <header class="sticky top-0 z-30 bg-white/95 backdrop-blur border-b border-slate-200 shadow-xs">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-xl bg-indigo-950 text-white flex items-center justify-center font-extrabold text-lg tracking-tight shadow-sm">
+          AT
+        </div>
+        <div>
+          <div class="flex items-center gap-2">
+            <h1 class="text-lg sm:text-xl font-bold text-slate-900 tracking-tight">
+              宣伝会議 AdverTimes キュレーションハブ
+            </h1>
+            <span class="px-2.5 py-0.5 text-xs font-semibold rounded-full bg-indigo-50 text-indigo-700 border border-indigo-200">
+              2026.11.08 取得分
+            </span>
+          </div>
+          <p class="text-xs text-slate-500 mt-0.5">
+            「クリエイティブ」5選 ＆ 「マーケティング」5選 — スプレッドシート（宣伝会議タブ）連動
+          </p>
+        </div>
+      </div>
+
+      <div class="flex flex-wrap items-center gap-2.5">
+        <a
+          href="https://docs.google.com/spreadsheets/d/1qBShCXBsafSI5x5JwMP4SdRHMQOwq3l2t_U_sFykEGc/edit#gid=558325069"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center gap-2 px-3.5 py-2 rounded-lg text-xs font-semibold bg-emerald-600 hover:bg-emerald-700 text-white shadow-xs transition"
+        >
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M3 10h18M3 14h18m-9-4v8m-7 0h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
+          </svg>
+          Googleスプレッドシート（宣伝会議タブ）を開く
+        </a>
+        <a
+          href="https://www.advertimes.com/"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-lg text-xs font-semibold bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-200 transition"
+        >
+          AdverTimes 公式
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+          </svg>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-6">
+    <!-- KPI & View Switcher Banner -->
+    <section class="grid grid-cols-2 sm:grid-cols-4 gap-3.5">
+      <div class="bg-white rounded-xl p-4 border border-slate-200 shadow-2xs">
+        <div class="text-xs font-medium text-slate-500">本日のピックアップ総数</div>
+        <div class="mt-1 flex items-baseline gap-2">
+          <span class="text-2xl font-extrabold text-slate-900" id="stat-total">10</span>
+          <span class="text-xs text-slate-500">記事（各5件）</span>
+        </div>
+      </div>
+      <div class="bg-white rounded-xl p-4 border border-slate-200 shadow-2xs">
+        <div class="text-xs font-medium text-indigo-600">クリエイティブ領域</div>
+        <div class="mt-1 flex items-baseline gap-2">
+          <span class="text-2xl font-extrabold text-indigo-950">5</span>
+          <span class="text-xs text-slate-500">OOH / 音声広告 / CM / 防災</span>
+        </div>
+      </div>
+      <div class="bg-white rounded-xl p-4 border border-slate-200 shadow-2xs">
+        <div class="text-xs font-medium text-rose-600">マーケティング領域</div>
+        <div class="mt-1 flex items-baseline gap-2">
+          <span class="text-2xl font-extrabold text-rose-950">5</span>
+          <span class="text-xs text-slate-500">IP共創 / 体験イベント / 購買動向</span>
+        </div>
+      </div>
+      <div class="bg-white rounded-xl p-4 border border-slate-200 shadow-2xs">
+        <div class="text-xs font-medium text-amber-600">特選・高注目度（⭐️⭐️）</div>
+        <div class="mt-1 flex items-baseline gap-2">
+          <span class="text-2xl font-extrabold text-amber-600" id="stat-stars">5</span>
+          <span class="text-xs text-slate-500">企画の参考度：高</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Controls: Category Tabs, Search, View Mode -->
+    <section class="bg-white rounded-xl p-4 border border-slate-200 shadow-2xs space-y-3">
+      <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-3">
+        <!-- Category Filter Buttons -->
+        <div class="flex flex-wrap items-center gap-1.5" id="category-tabs">
+          <button data-cat="ALL" class="cat-btn px-3.5 py-2 rounded-lg text-xs font-bold bg-slate-900 text-white transition">
+            すべて表示 (10)
+          </button>
+          <button data-cat="クリエイティブ" class="cat-btn px-3.5 py-2 rounded-lg text-xs font-bold bg-slate-100 text-slate-700 hover:bg-slate-200 transition">
+            🎨 クリエイティブ (5)
+          </button>
+          <button data-cat="マーケティング" class="cat-btn px-3.5 py-2 rounded-lg text-xs font-bold bg-slate-100 text-slate-700 hover:bg-slate-200 transition">
+            📈 マーケティング (5)
+          </button>
+          <button data-cat="STAR2" class="cat-btn px-3.5 py-2 rounded-lg text-xs font-bold bg-amber-50 text-amber-800 border border-amber-200 hover:bg-amber-100 transition">
+            ⭐️⭐️ 注目ピックアップのみ (5)
+          </button>
+        </div>
+
+        <!-- Search & View Mode -->
+        <div class="flex flex-wrap items-center gap-2">
+          <div class="relative flex-1 sm:w-64">
+            <input
+              id="search-input"
+              type="text"
+              placeholder="企業名・キーワード・タグで検索..."
+              class="w-full pl-9 pr-3 py-2 text-xs rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+            />
+            <svg class="w-4 h-4 text-slate-400 absolute left-3 top-2.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-4.35-4.35m0 0A7.5 7.5 0 103.5 10.5a7.5 7.5 0 0013.15 6.15z" />
+            </svg>
+          </div>
+          <div class="inline-flex rounded-lg border border-slate-200 p-0.5 bg-slate-100">
+            <button id="view-cards-btn" class="px-3 py-1.5 rounded-md text-xs font-bold bg-white text-slate-900 shadow-2xs transition">
+              カード詳細表示
+            </button>
+            <button id="view-sheet-btn" class="px-3 py-1.5 rounded-md text-xs font-bold text-slate-600 hover:text-slate-900 transition">
+              スプシ互換テーブル表示
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tag Pills -->
+      <div class="flex items-center gap-1.5 flex-wrap pt-1 border-t border-slate-100" id="tag-container">
+        <span class="text-xs font-semibold text-slate-400 mr-1">タグ絞り込み:</span>
+      </div>
+    </section>
+
+    <!-- Cards Grid View -->
+    <section id="cards-view" class="grid grid-cols-1 md:grid-cols-2 gap-5"></section>
+
+    <!-- Spreadsheet Table View -->
+    <section id="sheet-view" class="hidden bg-white rounded-xl border border-slate-200 shadow-2xs overflow-hidden">
+      <div class="p-4 border-b border-slate-200 flex items-center justify-between bg-slate-50">
+        <div>
+          <h2 class="text-sm font-bold text-slate-900">Googleスプレッドシート「宣伝会議」タブ 蓄積データ一覧</h2>
+          <p class="text-xs text-slate-500">2タブ目「ニュース」と同じ12列フォーマットで同期済みです</p>
+        </div>
+        <button id="copy-tsv-btn" class="px-3 py-1.5 rounded-lg text-xs font-semibold bg-white border border-slate-200 hover:bg-slate-100 text-slate-700 transition">
+          TSVをクリップボードにコピー
+        </button>
+      </div>
+      <div class="overflow-x-auto">
+        <table class="w-full text-left border-collapse text-xs">
+          <thead>
+            <tr class="bg-slate-100 text-slate-700 border-b border-slate-200">
+              <th class="py-2.5 px-3 font-bold whitespace-nowrap">日付</th>
+              <th class="py-2.5 px-3 font-bold whitespace-nowrap">カテゴリ</th>
+              <th class="py-2.5 px-3 font-bold min-w-[280px]">トピック（1行要約）</th>
+              <th class="py-2.5 px-3 font-bold whitespace-nowrap">注目度</th>
+              <th class="py-2.5 px-3 font-bold min-w-[220px]">情報源（元記事タイトル）</th>
+              <th class="py-2.5 px-3 font-bold whitespace-nowrap">取得日</th>
+              <th class="py-2.5 px-3 font-bold whitespace-nowrap">タグ</th>
+              <th class="py-2.5 px-3 font-bold whitespace-nowrap">操作</th>
+            </tr>
+          </thead>
+          <tbody id="sheet-tbody" class="divide-y divide-slate-200"></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <!-- Full Article Modal -->
+  <div id="article-modal" class="fixed inset-0 z-50 hidden bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-4">
+    <div class="bg-white rounded-2xl max-w-3xl w-full max-h-[90vh] flex flex-col shadow-2xl border border-slate-200 overflow-hidden">
+      <div class="p-4 sm:p-5 border-b border-slate-200 flex items-start justify-between gap-4 bg-slate-50">
+        <div class="space-y-1">
+          <div class="flex flex-wrap items-center gap-2" id="modal-badges"></div>
+          <h3 id="modal-title" class="text-base sm:text-lg font-extrabold text-slate-900 leading-snug"></h3>
+        </div>
+        <button id="modal-close" class="p-2 rounded-lg text-slate-400 hover:text-slate-700 hover:bg-slate-200 transition">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+      <div class="p-5 sm:p-6 overflow-y-auto space-y-5 text-sm leading-relaxed text-slate-700" id="modal-body"></div>
+      <div class="p-4 border-t border-slate-200 bg-slate-50 flex items-center justify-between">
+        <span id="modal-meta" class="text-xs text-slate-500"></span>
+        <a id="modal-link" href="#" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg text-xs font-bold bg-indigo-950 text-white hover:bg-indigo-900 transition">
+          AdverTimesで元記事を開く
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+          </svg>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const ARTICLES = [{"id": "563235", "date": "2026-11-06", "category": "クリエイティブ", "title": "「第79回広告電通賞展」アドミュージアム東京で始まる 総合賞の大塚製薬など展示", "tags": ["#アドミュージアム東京", "#大塚製薬", "#広告電通賞"], "url": "https://www.advertimes.com/20261106/article563235/", "excerpt": "アドミュージアム東京（東京・汐留）で11月6日から、「第79回広告電通賞展」がスタートする。2025年4月から2026年3月までに実施された広告コミュニ...", "image": "https://cdn.advertimes.com/wp-content/uploads/2026/11/79th-dentsu-ad-awards-exhibit_ad-museum-tokyo_ogp-1024x576.jpg", "paragraphs": [{"tag": "p", "text": "アドミュージアム東京（東京・汐留）で11月6日から、「第79回広告電通賞展」がスタートする。2025年4月から2026年3月までに実施された広告コミュニケーション作品を称えるもので、7月に結果が発表されている。その受賞作品が一堂に会する。会期は11月28日まで。"}, {"tag": "p", "text": "特に優れた成果をあげた「総合賞」には大塚製薬が選出されており、同社の総合賞受賞は通算3回目となる。"}, {"tag": "p", "text": "大塚製薬は今回「プリント広告」「フィルム広告」の2部門でそれぞれ、ポカリスエットのグラフィック広告シリーズ「つば裏言葉」、カロリーメイトのテレビCM「いちばんの味方」篇が最高賞を受賞したほか、2つの金賞、7つの銀賞を受賞した。"}, {"tag": "p", "text": "今回の選考対象となった広告は、2025年4月から2026年3月まで（一部部門のみ2025年3月から2026年3月）に実施されたもので、応募作品点数は1345点だった。"}, {"tag": "p", "text": "開館は火曜から土曜の12～18時。日曜、月曜休館（ほか不定休あり）。入場無料。"}], "body_images": ["https://cdn.advertimes.com/wp-content/uploads/2026/11/79th-dentsu-ad-awards-exhibit_ad-museum-tokyo01.jpg"], "page_count": 1, "is_locked": false, "full_text": "アドミュージアム東京（東京・汐留）で11月6日から、「第79回広告電通賞展」がスタートする。2025年4月から2026年3月までに実施された広告コミュニケーション作品を称えるもので、7月に結果が発表されている。その受賞作品が一堂に会する。会期は11月28日まで。\n\n特に優れた成果をあげた「総合賞」には大塚製薬が選出されており、同社の総合賞受賞は通算3回目となる。\n\n大塚製薬は今回「プリント広告」「フィルム広告」の2部門でそれぞれ、ポカリスエットのグラフィック広告シリーズ「つば裏言葉」、カロリーメイトのテレビCM「いちばんの味方」篇が最高賞を受賞したほか、2つの金賞、7つの銀賞を受賞した。\n\n今回の選考対象となった広告は、2025年4月から2026年3月まで（一部部門のみ2025年3月から2026年3月）に実施されたもので、応募作品点数は1345点だった。\n\n開館は火曜から土曜の12～18時。日曜、月曜休館（ほか不定休あり）。入場無料。", "topic": "「第79回広告電通賞展」がアドミュージアム東京で開幕、3度目の総合賞・大塚製薬の受賞作などを一挙展示", "stars": "⭐️", "sub_theme": "アワード・展示", "company": "大塚製薬 / アドミュージアム東京", "summary_3lines": ["2025年4月〜2026年3月の優秀な広告作品を称える「第79回広告電通賞展」が11月6日〜28日まで汐留・アドミュージアム東京で開催（入場無料）。", "応募1,345点の中から「総合賞」には大塚製薬が通算3回目の選出。", "ポカリスエットのグラフィック「つば裏言葉」とカロリーメイトCM「いちばんの味方」篇の2部門最高賞をはじめ、金賞2・銀賞7を獲得。"], "key_insight": "長年にわたり受験生や部活生のインサイトを深掘りし続ける大塚製薬がプリント・フィルム両部門で最高賞を制覇。", "fetched_at": "2026-11-08", "source_label": "宣伝会議 AdverTimes（クリエイティブ）"}, {"id": "563296", "date": "2026-11-06", "category": "クリエイティブ", "title": "就活生を応援するのは「丸の内の街」 面接前の不安に寄り添う三菱地所の音声広告がグランプリ 「Spotify Hits Japan 2026」", "tags": ["#Spotify", "#音声広告"], "url": "https://www.advertimes.com/20261106/article563296/", "excerpt": "オーディオストリーミングプラットフォームSpotify（スポティファイ）が主催する音声広告のクリエイティブアワード「Spotify Hits Japan 2026」の...", "image": "https://cdn.advertimes.com/wp-content/uploads/2026/11/spotif_hits-japan2016_award-ceremony_ogp-1024x576.jpg", "paragraphs": [{"tag": "p", "text": "オーディオストリーミングプラットフォームSpotify（スポティファイ）が主催する音声広告のクリエイティブアワード「Spotify Hits Japan 2026」の贈賞式が11月5日に都内で開かれ、各部門の受賞作品が発表された。部門を超えて選ばれるグランプリ「Spotify Mic Drop」には、三菱地所の就活生応援キャンペーン「フレー！フレー！就活生」が選ばれた。"}, {"tag": "p", "text": "「Spotify Mic Drop」に選ばれた三菱地所"}, {"tag": "p", "text": "3回目の開催となる今年は、Spotifyの日本上陸10周年に合わせ、「Thank You for the Hits. Let’s Make the Next.（10年分の感謝を、次のHitsへ）」をテーマに掲げた。3つのキャンペーン部門と、若手クリエイターらによるアイデアを競う公募部門「Future Hitmakers」の計4部門・20作品がファイナリストに選出された。"}, {"tag": "p", "text": "三菱地所の「フレー！フレー！就活生」は、就職活動中の学生が面接前の不安を和らげるために音楽を聴くことに着目し、東京・丸の内の街全体からエールを届ける取り組み。企画・制作は電通と電通クリエイティブピクチャーズが担当した。"}, {"tag": "p", "text": "Spotifyの音声広告では、就職活動の経験者や社員の実体験をもとに、多くの就活生を見守ってきた街の視点から応援メッセージを発信した。"}, {"tag": "p", "text": "街中の屋外広告やカフェでの「就活生割」とも連動。音楽を聴く時間、街中で広告を目にする瞬間、カフェで過ごす時間を通じて、就活生が丸の内という街からの応援を実感できる体験を設計した。音声とリアルな街での接点を組み合わせ、就活生の不安に寄り添うキャンペーンとなった。"}, {"tag": "p", "text": "Spotify JAPAC広告事業部統括のエリサ・ケルサル氏は、今回の応募作品について「リスナーの大切な瞬間を捉え、想像力を掻き立てる、Spotify広告ならではのパワーが息づいています」とコメント。今後も広告主やクリエイターとともに、新たな音声広告の可能性を追求する考えを示した。"}, {"tag": "h2", "text": "Spotify Hits Japan 2026 受賞作品一覧"}, {"tag": "p", "text": "そのほかの各部門の受賞作品は以下の通り（カッコ内は広告主、企画・制作会社の順）。"}, {"tag": "h3", "text": "Ear Candy（ベスト・イマーシブ・オーディオ・キャンペーン）部門"}, {"tag": "p", "text": "「ALLIE 凹凸補整フィルターUV 2026年夏訴求」（カネボウ化粧品、花王／博報堂）"}, {"tag": "p", "text": "日やけ止め「ALLIE 凹凸補整フィルターUV」の商品特長を音で伝える広告。「蛍の光」を一定の音程で歌う演出により、肌の凹凸をフラットに補整する商品の特徴を表現した。朝夕の生活場面に合わせて配信し、音楽の合間に流れる意外性のある演出で、商品への理解を促した。"}], "body_images": ["https://cdn.advertimes.com/wp-content/uploads/2026/11/spotif_hits-japan2016_award-ceremony01.jpg", "https://cdn.advertimes.com/wp-content/uploads/2026/11/spotif_hits-japan2016_award-ceremony02.jpg"], "page_count": 3, "is_locked": true, "full_text": "オーディオストリーミングプラットフォームSpotify（スポティファイ）が主催する音声広告のクリエイティブアワード「Spotify Hits Japan 2026」の贈賞式が11月5日に都内で開かれ、各部門の受賞作品が発表された。部門を超えて選ばれるグランプリ「Spotify Mic Drop」には、三菱地所の就活生応援キャンペーン「フレー！フレー！就活生」が選ばれた。\n\n「Spotify Mic Drop」に選ばれた三菱地所\n\n3回目の開催となる今年は、Spotifyの日本上陸10周年に合わせ、「Thank You for the Hits. Let’s Make the Next.（10年分の感謝を、次のHitsへ）」をテーマに掲げた。3つのキャンペーン部門と、若手クリエイターらによるアイデアを競う公募部門「Future Hitmakers」の計4部門・20作品がファイナリストに選出された。\n\n三菱地所の「フレー！フレー！就活生」は、就職活動中の学生が面接前の不安を和らげるために音楽を聴くことに着目し、東京・丸の内の街全体からエールを届ける取り組み。企画・制作は電通と電通クリエイティブピクチャーズが担当した。\n\nSpotifyの音声広告では、就職活動の経験者や社員の実体験をもとに、多くの就活生を見守ってきた街の視点から応援メッセージを発信した。\n\n街中の屋外広告やカフェでの「就活生割」とも連動。音楽を聴く時間、街中で広告を目にする瞬間、カフェで過ごす時間を通じて、就活生が丸の内という街からの応援を実感できる体験を設計した。音声とリアルな街での接点を組み合わせ、就活生の不安に寄り添うキャンペーンとなった。\n\nSpotify JAPAC広告事業部統括のエリサ・ケルサル氏は、今回の応募作品について「リスナーの大切な瞬間を捉え、想像力を掻き立てる、Spotify広告ならではのパワーが息づいています」とコメント。今後も広告主やクリエイターとともに、新たな音声広告の可能性を追求する考えを示した。\n\nSpotify Hits Japan 2026 受賞作品一覧\n\nそのほかの各部門の受賞作品は以下の通り（カッコ内は広告主、企画・制作会社の順）。\n\nEar Candy（ベスト・イマーシブ・オーディオ・キャンペーン）部門\n\n「ALLIE 凹凸補整フィルターUV 2026年夏訴求」（カネボウ化粧品、花王／博報堂）\n\n日やけ止め「ALLIE 凹凸補整フィルターUV」の商品特長を音で伝える広告。「蛍の光」を一定の音程で歌う演出により、肌の凹凸をフラットに補整する商品の特徴を表現した。朝夕の生活場面に合わせて配信し、音楽の合間に流れる意外性のある演出で、商品への理解を促した。", "topic": "Spotify音声広告アワード「Hits Japan 2026」、面接前の就活生を丸の内の街全体で応援する三菱地所の企画がグランプリ", "stars": "⭐️⭐️", "sub_theme": "音声広告・OOH連動", "company": "三菱地所 / Spotify / カネボウ化粧品（ALLIE）", "summary_3lines": ["Spotify日本上陸10周年の音声広告賞「Spotify Hits Japan 2026」贈賞式が開催され、三菱地所「フレー！フレー！就活生」が最高賞『Spotify Mic Drop』を受賞。", "面接前に音楽で不安を和らげる就活生に着目し、丸の内の社員・経験者の声による音声広告と、街中のOOH・カフェの「就活生割」を立体的に連動。", "イマーシブ部門（Ear Candy）では、「蛍の光」を一定の音程で歌い肌の凹凸補整を表現したカネボウ化粧品「ALLIE」が受賞。"], "key_insight": "「イヤホンの中の音声体験」と「リアルな街（丸の内）のOOH・カフェ体験」をシームレスに接続した文脈設計が高評価。", "fetched_at": "2026-11-08", "source_label": "宣伝会議 AdverTimes（クリエイティブ）"}, {"id": "563271", "date": "2026-11-06", "category": "クリエイティブ", "title": "「いま看板動いた…!?」 午後の紅茶が1日限定新宿ジャック、40年目にしてアンナ・マリア婦人に“命を吹き込んだ”理由", "tags": ["#OOH", "#午後の紅茶"], "url": "https://www.advertimes.com/20261106/article563271/", "excerpt": "キリンビバレッジは11月1日の「紅茶の日」に合わせて、新宿駅東口のルミネエスト新宿壁面サイネージにて大型OOHを1日限定でジャックする特別企画を...", "image": "https://cdn.advertimes.com/wp-content/uploads/2026/11/gogotea-ad-ogp-b-1024x576.jpg", "paragraphs": [{"tag": "p", "text": "キリンビバレッジは11月1日の「紅茶の日」に合わせて、新宿駅東口のルミネエスト新宿壁面サイネージにて大型OOHを1日限定でジャックする特別企画を実施した。主力ブランド「キリン 午後の紅茶」が発売40周年を迎える節目の年である今年、ブランドの象徴であるロゴマークの「アンナ・マリア婦人」が初めて動き出すという新たな演出が展開され、街ゆく人々の注目を集めた。あわせて、ルミネエスト新宿8F「THE PARK」でのペットボトルサンプリングも実施された。"}, {"tag": "p", "text": "長年パッケージに描かれ、生活者にとっても身近な存在である「アンナ・マリア婦人」をなぜ今、動かしたのか。そこには、単に周年を祝うだけでなく、現代の生活者との距離を縮め、紅茶文化の魅力を再発信したいというブランドの狙いがあった。"}, {"tag": "p", "text": "本企画の背景やクリエイティブのこだわりについて、同社マーケティング部ブランド担当の大澤寛文氏、加藤華氏に話を聞いた。"}, {"tag": "p", "text": "「キリン 午後の紅茶」は2026年5月、40周年を機にレギュラーシリーズであるストレートティー/ミルクティー/レモンティーのリニューアル発売を開始した。"}, {"tag": "h2", "text": "「1日限定」に込められた体験設計"}, {"tag": "p", "text": "今回のOOHジャックはあえて11月1日のみに絞って実施された。その最大の理由は、静止画の看板が突然動き出すことによる「驚きの最大化」にあったという。"}, {"tag": "p", "text": "通常のロール放映のように数分おきに映像を流してしまうと、単なる動画広告として流し見されてしまう懸念がある。"}, {"tag": "p", "text": "「街の景色に溶け込んだ看板がふとした瞬間にだけ動くからこそ、『いま動いた？』『何か飲んでる！』という特別な発見が生まれると考えました」（大澤氏・加藤氏）。"}, {"tag": "p", "text": "また、朝5時から夜24時まで、生活リズムに合わせてアンナ・マリア婦人の仕草が変化していく演出も取り入れられた。この「その場に居合わせた人だけが目撃できる特別体験」を1日に集中させることで、SNSでの自発的な発話や拡散を促し、「紅茶の日」を象徴する話題化を図る狙いがあった。"}, {"tag": "p", "text": "実際の掲出の様子。口元に手を当てて、あくびをする様子などが描かれた。"}, {"tag": "h2", "text": "ブランドの象徴に命を吹き込む、クリエイティブの裏側"}, {"tag": "p", "text": "同社は1986年、日本初のペットボトル入り紅茶を発売する際、「日本にもイギリスの本物の紅茶の習慣を根付かせたい」という思いから、アフタヌーンティーの生みの親であるアンナ・マリア夫人をパッケージのシンボルマークに採用した。"}], "body_images": ["https://cdn.advertimes.com/wp-content/uploads/2026/11/gogotea-ad01.jpg", "https://cdn.advertimes.com/wp-content/uploads/2026/11/gogotea-ad02.jpg", "https://cdn.advertimes.com/wp-content/uploads/2026/11/gogotea-ad03.jpg"], "page_count": 2, "is_locked": true, "full_text": "キリンビバレッジは11月1日の「紅茶の日」に合わせて、新宿駅東口のルミネエスト新宿壁面サイネージにて大型OOHを1日限定でジャックする特別企画を実施した。主力ブランド「キリン 午後の紅茶」が発売40周年を迎える節目の年である今年、ブランドの象徴であるロゴマークの「アンナ・マリア婦人」が初めて動き出すという新たな演出が展開され、街ゆく人々の注目を集めた。あわせて、ルミネエスト新宿8F「THE PARK」でのペットボトルサンプリングも実施された。\n\n長年パッケージに描かれ、生活者にとっても身近な存在である「アンナ・マリア婦人」をなぜ今、動かしたのか。そこには、単に周年を祝うだけでなく、現代の生活者との距離を縮め、紅茶文化の魅力を再発信したいというブランドの狙いがあった。\n\n本企画の背景やクリエイティブのこだわりについて、同社マーケティング部ブランド担当の大澤寛文氏、加藤華氏に話を聞いた。\n\n「キリン 午後の紅茶」は2026年5月、40周年を機にレギュラーシリーズであるストレートティー/ミルクティー/レモンティーのリニューアル発売を開始した。\n\n「1日限定」に込められた体験設計\n\n今回のOOHジャックはあえて11月1日のみに絞って実施された。その最大の理由は、静止画の看板が突然動き出すことによる「驚きの最大化」にあったという。\n\n通常のロール放映のように数分おきに映像を流してしまうと、単なる動画広告として流し見されてしまう懸念がある。\n\n「街の景色に溶け込んだ看板がふとした瞬間にだけ動くからこそ、『いま動いた？』『何か飲んでる！』という特別な発見が生まれると考えました」（大澤氏・加藤氏）。\n\nまた、朝5時から夜24時まで、生活リズムに合わせてアンナ・マリア婦人の仕草が変化していく演出も取り入れられた。この「その場に居合わせた人だけが目撃できる特別体験」を1日に集中させることで、SNSでの自発的な発話や拡散を促し、「紅茶の日」を象徴する話題化を図る狙いがあった。\n\n実際の掲出の様子。口元に手を当てて、あくびをする様子などが描かれた。\n\nブランドの象徴に命を吹き込む、クリエイティブの裏側\n\n同社は1986年、日本初のペットボトル入り紅茶を発売する際、「日本にもイギリスの本物の紅茶の習慣を根付かせたい」という思いから、アフタヌーンティーの生みの親であるアンナ・マリア夫人をパッケージのシンボルマークに採用した。", "topic": "キリン「午後の紅茶」40周年で1日限定の新宿大型OOHジャック、ロゴの「アンナ・マリア婦人」が初めて動く演出で話題化", "stars": "⭐️⭐️", "sub_theme": "OOH・ブランド体験", "company": "キリンビバレッジ（午後の紅茶）", "summary_3lines": ["11月1日「紅茶の日」限定でルミネエスト新宿壁面サイネージをジャックし、発売40周年の象徴「アンナ・マリア婦人」が初めて動く演出を展開。", "数分おきのロール放映では単なる動画広告として流し見されるため、あえて「1日限定・ふとした瞬間に突然動く」設計で驚きの最大化を狙った。", "朝5時〜夜24時まで生活リズムに合わせて婦人の仕草（あくびやティータイムなど）が変化し、居合わせた人のSNS自然発話とサンプリング連動を促進。"], "key_insight": "「常時動画」ではなく「静止画看板が突然動く違和感」と「時間帯連動×1日限定」の希少性でSNS時代の目撃体験を創出。", "fetched_at": "2026-11-08", "source_label": "宣伝会議 AdverTimes（クリエイティブ）"}, {"id": "563181", "date": "2026-11-06", "category": "クリエイティブ", "title": "新たな「防災情報発信」の場はYouTubeの24時間ライブ 「NERV防災アプリ」運営のゲヒルンの思い", "tags": ["#NERV", "#YouTube", "#ゲヒルン", "#災害", "#防災"], "url": "https://www.advertimes.com/20261106/article563181/", "excerpt": "地震や災害などの情報を提供するアプリ「特務機関NERV（ネルフ）防災」を運営するゲヒルンは11月2日、YouTubeで、地震・津波、気象など幅広い情報...", "image": "https://cdn.advertimes.com/wp-content/uploads/2026/11/gehirn_24-hr-youtube_nerv_emergencies_ogp-1024x576.jpg", "paragraphs": [{"tag": "p", "text": "地震や災害などの情報を提供するアプリ「特務機関NERV（ネルフ）防災」を運営するゲヒルンは11月2日、YouTubeで、地震・津波、気象など幅広い情報を発信する「特務機関NERV防災ライブ（総合）」（「NERV防災ライブ」）の24時間配信を開始した。緊急速報メールが配信されなかった事態を受け、一部の情報経路に支障が出た場合もいち早く情報を伝える体制整備を目指す。"}, {"tag": "p", "text": "11月2日に配信を始めた「特務機関NERV防災ライブ（総合）」"}, {"tag": "p", "text": "「NERV防災」アプリが生まれたのは、2011年3月11日に発生した東日本大震災がきっかけだった。ゲヒルン社長の石森大貴氏の実家が宮城県石巻市にあり、何日も連絡がとれず、親族も亡くした。石森社長の経験から、テレビやラジオなど既存メディア以外で災害や防災の情報を発信しようとアプリを開発。無償で情報を提供しており、累計ダウンロード数は800万回を超えている。"}, {"tag": "p", "text": "こうして予報業務許可事業者（地震動）の許可も取得し、いちはやく情報を提供しているゲヒルン社が新たに始めたのが、YouTubeライブでの配信だ。アプリの利用者らから、全国の情報をまとめて見たい、パソコンでも見られるようにしてほしい、などの要望が寄せられており、ライブ配信はこれに応える方法でもあった。"}, {"tag": "p", "text": "加えてきっかけとなったのが、2026年10月の緊急速報メールをめぐる混乱だ。10月16日には、後に取り消された緊急地震速報について、気象庁から送られたデータの形式が従来と一部異なっていたことから、一部の携帯電話事業者で緊急速報メールが配信できない事態に。また、10月23日～25日には、Webサイトなどに使われるプログラミングム言語「PHP」に見つかった重大な脆弱性への対応として、一部の携帯電話事業者で緊急地震速報や津波警報など緊急速報メールの配信が一時的に停止されたこともあった。同社はこうした事態を受け、「防災情報を確実に届けるにはひとつの経路に依存しないことの重要性をあらためて示している」としている。"}, {"tag": "p", "text": "ライブでは、全国の防災気象情報を24時間配信。通常時は全国の気象警報・注意報、雨雲レーダーなどを繰り返し表示しながら、気象解説などの情報を文字テロップで流す。"}, {"tag": "p", "text": "台風情報や気象警報・注意報を流す場合の画面"}, {"tag": "p", "text": "一方、緊急地震速報や地震情報が発表された場合は、表示が切り替わり、音声でも通知。津波警報などが発表された場合は、津波情報を固定して表示し、その間に緊急地震速報や地震情報が発表された場合は臨時で割り込んで見られるようにするという。"}], "body_images": ["https://cdn.advertimes.com/wp-content/uploads/2026/11/gehirn_24-hr-youtube_nerv_emergencies_ogp.jpg", "https://cdn.advertimes.com/wp-content/uploads/2026/11/gehirn_24-hr-youtube_nerv_emergencies01.jpg"], "page_count": 2, "is_locked": true, "full_text": "地震や災害などの情報を提供するアプリ「特務機関NERV（ネルフ）防災」を運営するゲヒルンは11月2日、YouTubeで、地震・津波、気象など幅広い情報を発信する「特務機関NERV防災ライブ（総合）」（「NERV防災ライブ」）の24時間配信を開始した。緊急速報メールが配信されなかった事態を受け、一部の情報経路に支障が出た場合もいち早く情報を伝える体制整備を目指す。\n\n11月2日に配信を始めた「特務機関NERV防災ライブ（総合）」\n\n「NERV防災」アプリが生まれたのは、2011年3月11日に発生した東日本大震災がきっかけだった。ゲヒルン社長の石森大貴氏の実家が宮城県石巻市にあり、何日も連絡がとれず、親族も亡くした。石森社長の経験から、テレビやラジオなど既存メディア以外で災害や防災の情報を発信しようとアプリを開発。無償で情報を提供しており、累計ダウンロード数は800万回を超えている。\n\nこうして予報業務許可事業者（地震動）の許可も取得し、いちはやく情報を提供しているゲヒルン社が新たに始めたのが、YouTubeライブでの配信だ。アプリの利用者らから、全国の情報をまとめて見たい、パソコンでも見られるようにしてほしい、などの要望が寄せられており、ライブ配信はこれに応える方法でもあった。\n\n加えてきっかけとなったのが、2026年10月の緊急速報メールをめぐる混乱だ。10月16日には、後に取り消された緊急地震速報について、気象庁から送られたデータの形式が従来と一部異なっていたことから、一部の携帯電話事業者で緊急速報メールが配信できない事態に。また、10月23日～25日には、Webサイトなどに使われるプログラミングム言語「PHP」に見つかった重大な脆弱性への対応として、一部の携帯電話事業者で緊急地震速報や津波警報など緊急速報メールの配信が一時的に停止されたこともあった。同社はこうした事態を受け、「防災情報を確実に届けるにはひとつの経路に依存しないことの重要性をあらためて示している」としている。\n\nライブでは、全国の防災気象情報を24時間配信。通常時は全国の気象警報・注意報、雨雲レーダーなどを繰り返し表示しながら、気象解説などの情報を文字テロップで流す。\n\n台風情報や気象警報・注意報を流す場合の画面\n\n一方、緊急地震速報や地震情報が発表された場合は、表示が切り替わり、音声でも通知。津波警報などが発表された場合は、津波情報を固定して表示し、その間に緊急地震速報や地震情報が発表された場合は臨時で割り込んで見られるようにするという。", "topic": "「特務機関NERV防災」のゲヒルンがYouTubeで24時間防災ライブ配信を開始、緊急速報メール障害を受け経路を多重化", "stars": "⭐️", "sub_theme": "防災・メディア配信", "company": "ゲヒルン（特務機関NERV防災）", "summary_3lines": ["累計800万DL超の「NERV防災」を運営するゲヒルンが、11月2日よりYouTubeで24時間ライブ配信「特務機関NERV防災ライブ（総合）」を開始。", "2026年10月に相次いだデータ形式差異やPHP脆弱性対応による携帯キャリアの緊急速報メール配信停止を受け、「単一経路に依存しない情報伝達」を構築。", "平時は全国の気象警報・雨雲レーダーを巡回表示し、地震・津波発生時は音声通知と固定・割り込み画面へ即座に自動切り替え。"], "key_insight": "通信キャリアやOSのプッシュ通知障害リスクに対し、PC・テレビでも常時視聴できるYouTubeライブを防災インフラの冗長系として活用。", "fetched_at": "2026-11-08", "source_label": "宣伝会議 AdverTimes（クリエイティブ）"}, {"id": "563101", "date": "2026-11-04", "category": "クリエイティブ", "title": "「ノドの刺激」を猪木の「ダァーッ！」で表現、坂口憲二出演「THE DRY」CMの狙い", "tags": ["#THE DRY", "#サントリー", "#坂口憲二"], "url": "https://www.advertimes.com/20261104/article563101/", "excerpt": "サントリーは、新ブランド「THE DRY（ザ ドライ）から「THE DRY〈グリーンレモン〉」と「同〈グレープフルーツ〉」を10月に20日に発売。それに先が...", "image": "https://cdn.advertimes.com/wp-content/uploads/2026/11/suntory_the-dry_cm_sns_ogp-1024x576.jpg", "paragraphs": [{"tag": "p", "text": "サントリーは、新ブランド「THE DRY（ザ ドライ）から「THE DRY〈グリーンレモン〉」と「同〈グレープフルーツ〉」を10月に20日に発売。それに先がけ、10月16日から坂口憲二さんがメッセンジャーを務める、新テレビCMを開始した。"}, {"tag": "p", "text": "黒い空間に流れるのは、♪～ドライ、ボンバイエ、ドライ、ボンバイエ～という、プロレスではおなじみのアントニオ猪木さんのテーマ曲。ゆっくりと顔を上げ、緑のタオルを首にかける坂口さん。猪木さんの引退式でのメッセージの一節、「危ぶむなかれ、危ぶめば道はなし」を心の中で語る。そして「THE DRY」を飲み、その刺激をノドに感じた次の瞬間、力いっぱい「ダァー!!」とうなるのだった。キャッチフレーズは、「どえらいドライだ」。"}, {"tag": "p", "text": "『登場』篇 30秒"}, {"tag": "p", "text": "「『THE DRY』は、高密度・強炭酸※・インパクトドライスピリッツにより、これまでのチューハイにはない、ノドへの刺激と圧倒的なキレ・爽快感を実現した新感覚のチューハイ。この『ノドがうなる果実のドライ』の、『ノドのうなり』をどのように表現すると一番インパクトをもって伝わるか、というオリエンでした」と、クリエイティブディレクター 大石タケシ氏。"}, {"tag": "p", "text": "ビールののどごしの定番的な表現と言えば、飲んだ後の「くぅーっ！」という一言。では、THE DRYならでは「くぅーっ！」とは、どんな表現になるのか。クリエイティブチームで、いろんなのどごしの表現を出し合うなかで出てきたのが、「ダァー』」という叫びだった。"}, {"tag": "p", "text": "「強炭酸でノドに強い刺激をうけたときって、『う〜』とか『お〜』ではなく、ノドがひらくことによって『アァァァー！』に近い声がでるよね。と。その最上級が『ダァー』なんじゃないかと」"}, {"tag": "p", "text": "「ダァー!!」と言えば、“燃える闘魂”で知られたプロレスラー アントニオ猪木さんの掛け声だ。生前、プロレスを通じて日本中の大人を元気づけてきたアントニオ猪木さんの掛け声を、今回CMで使わせてもらうことになった。\n「ターゲットである、40代の日本中のこの大変な時代を生きぬく大人たちを元気づけ、背中を押してくれるチューハイになれるんじゃないかと考えました」"}, {"tag": "p", "text": "「THE DRY」は1日を戦いぬいた大人たちが、仕事を終えて飲むことで、１日のストレスを打ち消し、自分をねぎらい、報酬感を与えてくれるチューハイ。そこでキャストは、ターゲット世代の大人たちが憧れる、その人自身の生き方がカッコイイ大人の男性として、坂口憲二さんに出演を依頼した。"}, {"tag": "p", "text": "「坂口憲二さんは、いちど俳優業を離れて自身のコーヒーブランドを立ち上げた後、また俳優として復帰した、まさに人生を楽しみ、戦いぬいてきた大人の男性。"}, {"tag": "p", "text": "また、坂口憲二さんはアントニオ猪木さんの盟友でもあり『黄金コンビ』と呼ばれた坂口征二さんの次男でもあります。猪木さんの盟友の息子の坂口憲二さんが『ダァーッ！』と叫ぶことは、ファンからしても心にくるものがあるのではないかと考えました」"}, {"tag": "p", "text": "今回、CMおよびグラフィックなどキャンペーン全体の差し色に、同商品のメインフレーバーであるグリーンレモンのカラーを使用。坂口さんの肩にかかるグリーンのタオルは猪木さんのトレードマークである赤いタオルを連想させ、CMにおける重要なキーモチーフとなっている。"}], "body_images": ["https://cdn.advertimes.com/wp-content/uploads/2026/11/suntory_the-dry_cm_sns01.jpg", "https://cdn.advertimes.com/wp-content/uploads/2026/11/suntory_the-dry_cm_sns02.jpg"], "page_count": 2, "is_locked": true, "full_text": "サントリーは、新ブランド「THE DRY（ザ ドライ）から「THE DRY〈グリーンレモン〉」と「同〈グレープフルーツ〉」を10月に20日に発売。それに先がけ、10月16日から坂口憲二さんがメッセンジャーを務める、新テレビCMを開始した。\n\n黒い空間に流れるのは、♪～ドライ、ボンバイエ、ドライ、ボンバイエ～という、プロレスではおなじみのアントニオ猪木さんのテーマ曲。ゆっくりと顔を上げ、緑のタオルを首にかける坂口さん。猪木さんの引退式でのメッセージの一節、「危ぶむなかれ、危ぶめば道はなし」を心の中で語る。そして「THE DRY」を飲み、その刺激をノドに感じた次の瞬間、力いっぱい「ダァー!!」とうなるのだった。キャッチフレーズは、「どえらいドライだ」。\n\n『登場』篇 30秒\n\n「『THE DRY』は、高密度・強炭酸※・インパクトドライスピリッツにより、これまでのチューハイにはない、ノドへの刺激と圧倒的なキレ・爽快感を実現した新感覚のチューハイ。この『ノドがうなる果実のドライ』の、『ノドのうなり』をどのように表現すると一番インパクトをもって伝わるか、というオリエンでした」と、クリエイティブディレクター 大石タケシ氏。\n\nビールののどごしの定番的な表現と言えば、飲んだ後の「くぅーっ！」という一言。では、THE DRYならでは「くぅーっ！」とは、どんな表現になるのか。クリエイティブチームで、いろんなのどごしの表現を出し合うなかで出てきたのが、「ダァー』」という叫びだった。\n\n「強炭酸でノドに強い刺激をうけたときって、『う〜』とか『お〜』ではなく、ノドがひらくことによって『アァァァー！』に近い声がでるよね。と。その最上級が『ダァー』なんじゃないかと」\n\n「ダァー!!」と言えば、“燃える闘魂”で知られたプロレスラー アントニオ猪木さんの掛け声だ。生前、プロレスを通じて日本中の大人を元気づけてきたアントニオ猪木さんの掛け声を、今回CMで使わせてもらうことになった。\n「ターゲットである、40代の日本中のこの大変な時代を生きぬく大人たちを元気づけ、背中を押してくれるチューハイになれるんじゃないかと考えました」\n\n「THE DRY」は1日を戦いぬいた大人たちが、仕事を終えて飲むことで、１日のストレスを打ち消し、自分をねぎらい、報酬感を与えてくれるチューハイ。そこでキャストは、ターゲット世代の大人たちが憧れる、その人自身の生き方がカッコイイ大人の男性として、坂口憲二さんに出演を依頼した。\n\n「坂口憲二さんは、いちど俳優業を離れて自身のコーヒーブランドを立ち上げた後、また俳優として復帰した、まさに人生を楽しみ、戦いぬいてきた大人の男性。\n\nまた、坂口憲二さんはアントニオ猪木さんの盟友でもあり『黄金コンビ』と呼ばれた坂口征二さんの次男でもあります。猪木さんの盟友の息子の坂口憲二さんが『ダァーッ！』と叫ぶことは、ファンからしても心にくるものがあるのではないかと考えました」\n\n今回、CMおよびグラフィックなどキャンペーン全体の差し色に、同商品のメインフレーバーであるグリーンレモンのカラーを使用。坂口さんの肩にかかるグリーンのタオルは猪木さんのトレードマークである赤いタオルを連想させ、CMにおける重要なキーモチーフとなっている。", "topic": "サントリー新チューハイ「THE DRY」CM、坂口憲二が父の盟友・アントニオ猪木の「ダァーッ！」で強炭酸のノド刺激を表現", "stars": "⭐️", "sub_theme": "テレビCM・キャスティング", "company": "サントリー（THE DRY）", "summary_3lines": ["サントリーの新ブランド「THE DRY〈グリーンレモン〉〈グレープフルーツ〉」発売に合わせ、坂口憲二出演のテレビCM『登場』篇を展開。", "強炭酸でノドが開く瞬間の「うなり」の最上級表現として、定番の「くぅーっ！」ではなくアントニオ猪木氏の「ダァー!!」とテーマ曲を採用。", "猪木氏の盟友・坂口征二氏の次男であり、難病から復帰しコーヒーブランドも手掛ける坂口憲二氏が緑のタオルを纏って叫ぶ文脈の深さで40代大人層を鼓舞。"], "key_insight": "シズル表現（「ダァー!!」）とタレント自身のストーリー（猪木氏の盟友の息子・坂口憲二氏）を重ね合わせ、グリーンレモンの緑タオルを象徴記号に昇華。", "fetched_at": "2026-11-08", "source_label": "宣伝会議 AdverTimes（クリエイティブ）"}, {"id": "563356", "date": "2026-11-06", "category": "マーケティング", "title": "「ブルーロック」とのコラボでアディダスジャパンが広告賞受賞 日本代表ユニフォーム販売は過去最高に、「講談社メディアアワード2026」", "tags": ["#PR", "#講談社"], "url": "https://www.advertimes.com/20261106/article563356/", "excerpt": "講談社は10月30日、都内で「講談社メディアカンファレンス2026」を開催し、「講談社メディアアワード2026」の贈賞式を実施した。", "image": "https://cdn.advertimes.com/wp-content/uploads/2026/11/kodansha-media-conf2026_media-awards2026_ceremony_ogp-1024x576.jpg", "paragraphs": [{"tag": "p", "text": "講談社は10月30日、都内で「講談社メディアカンファレンス2026」を開催し、「講談社メディアアワード2026」の贈賞式を実施した。"}, {"tag": "p", "text": "「講談社メディアアワード」は、40年間続いた「講談社広告賞」を前身とし、2019年に誕生したアワード。講談社と広告主の共創によって生まれた、未来志向の優れた広告企画を顕彰している。"}, {"tag": "p", "text": "今年は45企画がエントリーし、審査を経て5企画が受賞。さらに「パートナーシップ賞」と「NEW MEDIA CHALLENGE」もそれぞれ1企画が選ばれた。"}, {"tag": "p", "text": "贈賞式の様子。前列は受賞企業、後列は審査員"}, {"tag": "h2", "text": "日本代表ユニフォームの販売は過去最高に"}, {"tag": "p", "text": "受賞企画の一つが、アディダス ジャパンの「アディダス サッカー日本代表 2026 ユニフォーム ブルーロック カスタム 世界でひとつのエゴジャージを」キャンペーンだ。"}, {"tag": "p", "text": "今年6～7月に開かれたFIFAワールドカップ2026に合わせ、人気サッカー漫画「ブルーロック」とコラボレーション。描き下ろしイラストを使ったユニフォームのカスタマイズ体験を提供し、サッカーメディア「ゲキサカ」での情報発信と店頭施策を組み合わせた。"}, {"tag": "p", "text": "講談社の審査会レポートによると、対象流通のゼビオグループ全店舗における日本代表ユニフォームの販売枚数は、過去最高となる3万点を記録した。審査員からは、漫画IPの魅力とサッカーメディアの発信力、ワールドカップへの期待感を組み合わせ、購買につながる体験を創出した点が評価された。"}, {"tag": "p", "text": "サッポロビールの「赤星探偵団『ギャルとオヤジと赤星と。』」も受賞した。"}, {"tag": "p", "text": "サッポロラガービール「赤星」の魅力を紹介するオウンドメディア「赤星探偵団」と、ファッション誌「ViVi」のコラボレーション企画。昭和の雰囲気を愛するオヤジと、令和に生きるギャルという対照的な組み合わせを通じて、若年層に瓶ビールや酒場文化の魅力を伝えた。"}, {"tag": "p", "text": "「赤星探偵団」は10年間にわたり、ブランドのファンや取扱店との関係構築を続けてきた。審査では、既存顧客とのつながりを維持しながら、新たな世代へ訴求対象を広げた点や、継続的なコンテンツ発信によってブランド価値を蓄積してきた点に注目が集まった。"}, {"tag": "p", "text": "はるやま商事の「ViViスーツ」も選出された。2010年に始まった「ViVi」とのコラボレーションで、16年間にわたり商品開発と情報発信を展開してきた。"}, {"tag": "p", "text": "今年はTikTokを活用し、スーツ姿で踊るダンス動画を中心にSNSでの話題化を図った。個人投稿の総再生回数は1175万回以上に達し、ViViスーツの売り上げは前年比120％を達成した。"}], "body_images": ["https://cdn.advertimes.com/wp-content/uploads/2026/11/kodansha-media-conf2026_media-awards2026_ceremony01.jpg", "https://cdn.advertimes.com/wp-content/uploads/2026/11/kodansha-media-conf2026_media-awards2026_ceremony02.jpg", "https://cdn.advertimes.com/wp-content/uploads/2026/11/kodansha-media-conf2026_media-awards2026_ceremony03.jpg", "https://cdn.advertimes.com/wp-content/uploads/2026/11/kodansha-media-conf2026_media-awards2026_ceremony04.jpg"], "page_count": 3, "is_locked": true, "full_text": "講談社は10月30日、都内で「講談社メディアカンファレンス2026」を開催し、「講談社メディアアワード2026」の贈賞式を実施した。\n\n「講談社メディアアワード」は、40年間続いた「講談社広告賞」を前身とし、2019年に誕生したアワード。講談社と広告主の共創によって生まれた、未来志向の優れた広告企画を顕彰している。\n\n今年は45企画がエントリーし、審査を経て5企画が受賞。さらに「パートナーシップ賞」と「NEW MEDIA CHALLENGE」もそれぞれ1企画が選ばれた。\n\n贈賞式の様子。前列は受賞企業、後列は審査員\n\n日本代表ユニフォームの販売は過去最高に\n\n受賞企画の一つが、アディダス ジャパンの「アディダス サッカー日本代表 2026 ユニフォーム ブルーロック カスタム 世界でひとつのエゴジャージを」キャンペーンだ。\n\n今年6～7月に開かれたFIFAワールドカップ2026に合わせ、人気サッカー漫画「ブルーロック」とコラボレーション。描き下ろしイラストを使ったユニフォームのカスタマイズ体験を提供し、サッカーメディア「ゲキサカ」での情報発信と店頭施策を組み合わせた。\n\n講談社の審査会レポートによると、対象流通のゼビオグループ全店舗における日本代表ユニフォームの販売枚数は、過去最高となる3万点を記録した。審査員からは、漫画IPの魅力とサッカーメディアの発信力、ワールドカップへの期待感を組み合わせ、購買につながる体験を創出した点が評価された。\n\nサッポロビールの「赤星探偵団『ギャルとオヤジと赤星と。』」も受賞した。\n\nサッポロラガービール「赤星」の魅力を紹介するオウンドメディア「赤星探偵団」と、ファッション誌「ViVi」のコラボレーション企画。昭和の雰囲気を愛するオヤジと、令和に生きるギャルという対照的な組み合わせを通じて、若年層に瓶ビールや酒場文化の魅力を伝えた。\n\n「赤星探偵団」は10年間にわたり、ブランドのファンや取扱店との関係構築を続けてきた。審査では、既存顧客とのつながりを維持しながら、新たな世代へ訴求対象を広げた点や、継続的なコンテンツ発信によってブランド価値を蓄積してきた点に注目が集まった。\n\nはるやま商事の「ViViスーツ」も選出された。2010年に始まった「ViVi」とのコラボレーションで、16年間にわたり商品開発と情報発信を展開してきた。\n\n今年はTikTokを活用し、スーツ姿で踊るダンス動画を中心にSNSでの話題化を図った。個人投稿の総再生回数は1175万回以上に達し、ViViスーツの売り上げは前年比120％を達成した。", "topic": "「講談社メディアアワード2026」発表、ブルーロック×アディダス日本代表ユニフォームが販売過去最高の3万点を記録し受賞", "stars": "⭐️⭐️", "sub_theme": "IPコラボ・メディア共創", "company": "講談社 / アディダス ジャパン / サッポロビール / はるやま商事", "summary_3lines": ["講談社と広告主の共創企画を称える「講談社メディアアワード2026」贈賞式が開催され、45企画からアディダス、サッポロビール、はるやま商事など5企画が受賞。", "FIFAワールドカップ2026に合わせた『ブルーロック』×アディダスのカスタムユニフォーム企画は、『ゲキサカ』発信と店頭施策連動でゼビオ全店過去最高の3万点販売を達成。", "10周年を迎えた『赤星探偵団×ViVi』のギャル×オヤジ企画や、TikTokダンス動画で1,175万再生・売上前年比120%を記録したはるやま『ViViスーツ』も選出。"], "key_insight": "漫画・雑誌IPの熱量をデジタルメディア発信とリアル店舗のカスタム体験・SNS動画へ直結させ、明確な過去最高売上をつくった共創モデル。", "fetched_at": "2026-11-08", "source_label": "宣伝会議 AdverTimes（マーケティング）"}, {"id": "563340", "date": "2026-11-06", "category": "マーケティング", "title": "防災庁の「緊急要請」予告が引き金に？ 「防災トイレ」が爆売れ カインズで販売数28倍 非常食も10倍に 「備蓄への関心高まっている」の声", "tags": ["#カインズ", "#防災"], "url": "https://www.advertimes.com/20261106/article563340/", "excerpt": "政府による防災用品の備蓄要請を前に、ホームセンター大手のカインズで防災用品の販売が急増したことが判明した。", "image": "https://cdn.advertimes.com/wp-content/uploads/2026/11/cainz_disaster-preparedness-supplies_sales_ogp-1024x576.jpg", "paragraphs": [{"tag": "p", "text": "政府による防災用品の備蓄要請を前に、ホームセンター大手のカインズで防災用品の販売が急増したことが判明した。"}, {"tag": "p", "text": "同社によると、10月26日から11月1日までの防災用品の販売数量は前年同期比で約3倍に増加。特に簡易トイレは約28倍、非常食は約10倍、水タンクは約9倍と大幅に伸びた。"}, {"tag": "p", "text": "政府は11月2日、防災庁の発足に合わせて、国民に事前防災の徹底を求める「緊急要請」を発表した。これに先立つ10月26日には、細野豪志防災担当大臣が緊急要請を出す方針を示し、水や食料、トイレなどの備蓄を呼びかけていた。"}, {"tag": "p", "text": "政府の発信は、消費者の購買行動にどのような影響を与えているのか。カインズに販売動向や店舗での対応について聞いた。"}, {"tag": "p", "text": "簡易トイレ、非常食、水タンク"}, {"tag": "h2", "text": "需要増で追加発注も"}, {"tag": "p", "text": "カインズへの取材によると、2026年10月26日～11月1日の防災用品の販売数量は、2025年10月27日～11月2日と比較して約3倍に増加した。"}, {"tag": "p", "text": "品目別で特に伸びが目立ったのが、前年同期比約28倍となった簡易トイレだ。非常食も約10倍、水タンクも約9倍に伸びており、災害時の断水や食料不足を想定した商品の販売数量が大幅に増加した。"}, {"tag": "p", "text": "カインズでは、断水時にも使用できる凝固剤や汚物袋をセットにした簡易トイレをはじめ、長期保存可能な非常食、給水用の水タンクなど、さまざまな防災用品を取り扱っている。"}, {"tag": "p", "text": "こうした需要の高まりを受け、カインズは各店舗で防災用品の販売体制を強化している。"}, {"tag": "p", "text": "同社広報部は「『防災庁』発足の前後で、備蓄に対する関心は高まっていると感じます」と話す。"}, {"tag": "p", "text": "店舗では防災用品の売り場を拡大するなど、消費者のニーズに応えられるよう対応を進めているという。商品についても、需要が高いものから優先的に追加発注を行っており、需要増加に対応している。"}, {"tag": "h2", "text": "過去には売り切れも 能登半島地震で非常用トイレ14倍"}, {"tag": "p", "text": "カインズで防災用品の需要が急増したのは今回が初めてではない。"}, {"tag": "p", "text": "2024年1月の能登半島地震後にも、防災用品の販売が大きく伸びた。カインズの広報担当者は当時、ITmedia ビジネスオンラインの取材に対し、一部商品で売上が前年同週比20倍になったと説明。防災セットや飲料水、簡易トイレなど、ライフラインに関わる商品の需要が高まっていると明かしていた。"}], "body_images": ["https://cdn.advertimes.com/wp-content/uploads/2026/11/cainz_disaster-preparedness-supplies_sales01.jpg"], "page_count": 2, "is_locked": true, "full_text": "政府による防災用品の備蓄要請を前に、ホームセンター大手のカインズで防災用品の販売が急増したことが判明した。\n\n同社によると、10月26日から11月1日までの防災用品の販売数量は前年同期比で約3倍に増加。特に簡易トイレは約28倍、非常食は約10倍、水タンクは約9倍と大幅に伸びた。\n\n政府は11月2日、防災庁の発足に合わせて、国民に事前防災の徹底を求める「緊急要請」を発表した。これに先立つ10月26日には、細野豪志防災担当大臣が緊急要請を出す方針を示し、水や食料、トイレなどの備蓄を呼びかけていた。\n\n政府の発信は、消費者の購買行動にどのような影響を与えているのか。カインズに販売動向や店舗での対応について聞いた。\n\n簡易トイレ、非常食、水タンク\n\n需要増で追加発注も\n\nカインズへの取材によると、2026年10月26日～11月1日の防災用品の販売数量は、2025年10月27日～11月2日と比較して約3倍に増加した。\n\n品目別で特に伸びが目立ったのが、前年同期比約28倍となった簡易トイレだ。非常食も約10倍、水タンクも約9倍に伸びており、災害時の断水や食料不足を想定した商品の販売数量が大幅に増加した。\n\nカインズでは、断水時にも使用できる凝固剤や汚物袋をセットにした簡易トイレをはじめ、長期保存可能な非常食、給水用の水タンクなど、さまざまな防災用品を取り扱っている。\n\nこうした需要の高まりを受け、カインズは各店舗で防災用品の販売体制を強化している。\n\n同社広報部は「『防災庁』発足の前後で、備蓄に対する関心は高まっていると感じます」と話す。\n\n店舗では防災用品の売り場を拡大するなど、消費者のニーズに応えられるよう対応を進めているという。商品についても、需要が高いものから優先的に追加発注を行っており、需要増加に対応している。\n\n過去には売り切れも 能登半島地震で非常用トイレ14倍\n\nカインズで防災用品の需要が急増したのは今回が初めてではない。\n\n2024年1月の能登半島地震後にも、防災用品の販売が大きく伸びた。カインズの広報担当者は当時、ITmedia ビジネスオンラインの取材に対し、一部商品で売上が前年同週比20倍になったと説明。防災セットや飲料水、簡易トイレなど、ライフラインに関わる商品の需要が高まっていると明かしていた。", "topic": "防災庁発足と政府の「緊急要請」予告を受けカインズで防災用品が爆売れ、簡易トイレ販売数が前年比28倍・非常食10倍に急増", "stars": "⭐️⭐️", "sub_theme": "購買行動・リテール動向", "company": "カインズ（CAINZ）", "summary_3lines": ["11月2日の防災庁発足および政府の事前防災「緊急要請」予告を受け、カインズでの防災用品販売数量（10/26〜11/1）が前年同期比約3倍に急増。", "品目別では断水対策の「簡易トイレ」が前年比約28倍、「非常食」が約10倍、「水タンク」が約9倍とライフライン直結商品が突出。", "各店舗で防災売り場の拡大と優先的な追加発注を実施し、災害発生後だけでなく政策発表・報道を契機とした「平時の駆け込み備蓄需要」に対応。"], "key_insight": "災害発生時だけでなく「防災庁発足・大臣の事前予告」という政策ニュースが生活者の備蓄スイッチを押し、トイレ・水・食料の特需を誘発。", "fetched_at": "2026-11-08", "source_label": "宣伝会議 AdverTimes（マーケティング）"}, {"id": "563241", "date": "2026-11-06", "category": "マーケティング", "title": "ギャル文化も盛り盛り あゆの名曲がマックとコラボ セットや限定グッズを展開", "tags": ["#ギャル", "#マクドナルド", "#平成", "#浜崎あゆみ", "#音楽"], "url": "https://www.advertimes.com/20261106/article563241/", "excerpt": "日本マクドナルドは11月11日から、歌手の浜崎あゆみ（あゆ）とコラボしたセットを展開する。あゆのお気に入りのバーガーを入れ、人気楽曲からイン...", "image": "https://cdn.advertimes.com/wp-content/uploads/2026/11/mcdonalds-ayu-ogp-1024x576.jpg", "paragraphs": [{"tag": "p", "text": "日本マクドナルドは11月11日から、歌手の浜崎あゆみ（あゆ）とコラボしたセットを展開する。あゆのお気に入りのバーガーを入れ、人気楽曲からインスパイアされたセット名に。また、平成のギャルカルチャーをテーマにしたオリジナルビデオを公開。「Myマクドナルド リワード」限定での応募者には抽選でコラボグッズを贈るなど、世界観を伝える。"}, {"tag": "p", "text": "セットは「Buns&Grillsセット」と、「mimosaブーケセット」の2種。1999年にリリースされた曲「Boys&Girls」をもじった「Buns&Grillsセット」には、あゆお気に入りのメニューというダブルチーズバーガーを加え、「輝きだした僕達のBuns & Grillsセット」とこちらも歌詞を引用して表現している。"}, {"tag": "p", "text": "Buns&Grillsセット"}, {"tag": "p", "text": "「mimosaブーケセット」は、2025年にリリースされた曲「mimosa」からインスパイア。えびフィレオに、「ミモザのブーケのように華やかなポテトMサイズ2個を添えて」おり、「大人になったからmimosaブーケセット」としている。"}, {"tag": "p", "text": "mimosaブーケセット"}, {"tag": "p", "text": "コラボのテーマでもある「今しかない輝きがある」をテーマに、コンテンツも展開する。「Boys & Girls」と2002年にリリースされた「evolution」を令和のクリエイターが再解釈し、オリジナルのリリックビデオを制作。平成カルチャーやギャルが再び注目を集めている今、楽曲が生まれた時代の空気感を現代ならではの視点で再解釈し、令和世代に新たな魅力として届けるという。2 作目の「Boys & Girls」も近日公開する予定。"}, {"tag": "p", "text": "「evolution」のオリジナルリリックビデオ"}, {"tag": "p", "text": "また、マクドナルドの公式アプリから「Myマクドナルド リワード」に参加登録し、公式アプリを通じて商品を購入して得られるポイントで応募する限定のオリジナルグッズも展開。Tシャツやロングタオル、マグカップなどをそろえている。"}, {"tag": "p", "text": "Tシャツの応募期間は、11月12日まで"}, {"tag": "p", "text": "ロングタオルの応募期間は、11月19日まで"}, {"tag": "p", "text": "マグカップの応募期間は、12月3日まで"}], "body_images": ["https://cdn.advertimes.com/wp-content/uploads/2026/11/mcdonalds-ayu01.jpg", "https://cdn.advertimes.com/wp-content/uploads/2026/11/mcdonalds-ayu02.jpg", "https://cdn.advertimes.com/wp-content/uploads/2026/11/mcdonalds-ayu03.jpg", "https://cdn.advertimes.com/wp-content/uploads/2026/11/mcdonalds-ayu04.jpg", "https://cdn.advertimes.com/wp-content/uploads/2026/11/mcdonalds-ayu05.jpg"], "page_count": 1, "is_locked": false, "full_text": "日本マクドナルドは11月11日から、歌手の浜崎あゆみ（あゆ）とコラボしたセットを展開する。あゆのお気に入りのバーガーを入れ、人気楽曲からインスパイアされたセット名に。また、平成のギャルカルチャーをテーマにしたオリジナルビデオを公開。「Myマクドナルド リワード」限定での応募者には抽選でコラボグッズを贈るなど、世界観を伝える。\n\nセットは「Buns&Grillsセット」と、「mimosaブーケセット」の2種。1999年にリリースされた曲「Boys&Girls」をもじった「Buns&Grillsセット」には、あゆお気に入りのメニューというダブルチーズバーガーを加え、「輝きだした僕達のBuns & Grillsセット」とこちらも歌詞を引用して表現している。\n\nBuns&Grillsセット\n\n「mimosaブーケセット」は、2025年にリリースされた曲「mimosa」からインスパイア。えびフィレオに、「ミモザのブーケのように華やかなポテトMサイズ2個を添えて」おり、「大人になったからmimosaブーケセット」としている。\n\nmimosaブーケセット\n\nコラボのテーマでもある「今しかない輝きがある」をテーマに、コンテンツも展開する。「Boys & Girls」と2002年にリリースされた「evolution」を令和のクリエイターが再解釈し、オリジナルのリリックビデオを制作。平成カルチャーやギャルが再び注目を集めている今、楽曲が生まれた時代の空気感を現代ならではの視点で再解釈し、令和世代に新たな魅力として届けるという。2 作目の「Boys & Girls」も近日公開する予定。\n\n「evolution」のオリジナルリリックビデオ\n\nまた、マクドナルドの公式アプリから「Myマクドナルド リワード」に参加登録し、公式アプリを通じて商品を購入して得られるポイントで応募する限定のオリジナルグッズも展開。Tシャツやロングタオル、マグカップなどをそろえている。\n\nTシャツの応募期間は、11月12日まで\n\nロングタオルの応募期間は、11月19日まで\n\nマグカップの応募期間は、12月3日まで", "topic": "マクドナルドが浜崎あゆみとコラボ、「Boys & Girls」等を冠した限定セット2種と令和クリエイター再解釈の平成ギャルMVを展開", "stars": "⭐️", "sub_theme": "コラボキャンペーン・平成レトロ", "company": "日本マクドナルド × 浜崎あゆみ", "summary_3lines": ["日本マクドナルドが11月11日より浜崎あゆみコラボの「輝きだした僕達のBuns & Grillsセット」「大人になったからmimosaブーケセット」2種を発売。", "名曲『Boys & Girls』（1999年）と新曲『mimosa』（2025年）の歌詞・世界観を商品名とメニュー構成（ダブチ、えびフィレオ＋ポテトM2個）に反映。", "令和クリエイターが『evolution』等を平成ギャルカルチャー視点で再解釈したリリックビデオ公開や、アプリリワード限定のTシャツ・タオル・マグカップ抽選も実施。"], "key_insight": "当時のリアルタイム世代には歌詞引用でノスタルジーを喚起しつつ、令和世代には「平成ギャルカルチャーの再解釈MV」として新鮮に届ける二層アプローチ。", "fetched_at": "2026-11-08", "source_label": "宣伝会議 AdverTimes（マーケティング）"}, {"id": "563345", "date": "2026-11-06", "category": "マーケティング", "title": "事前予約は満枠 味の素、マヨネーズが主役の無料体験イベントを開催", "tags": ["#イベント", "#味の素", "#発表会"], "url": "https://www.advertimes.com/20261106/article563345/", "excerpt": "味の素は11月5日から8日までの4日間、東京・六本木ヒルズ カフェにて、体験型イベント「なぜマヨにハチミツを入れるのか。」を開催している（参加...", "image": "https://cdn.advertimes.com/wp-content/uploads/2026/11/ajinomoto-mayonnaise-ogp-1024x576.jpg", "paragraphs": [{"tag": "p", "text": "味の素は11月5日から8日までの4日間、東京・六本木ヒルズ カフェにて、体験型イベント「なぜマヨにハチミツを入れるのか。」を開催している（参加無料・事前予約制）。"}, {"tag": "p", "text": "「ピュアセレクト マヨネーズ ふわあま」は、隠し味として「はちみつ」を使用している。"}, {"tag": "p", "text": "本イベントは、同社が2026年8月に発売した「ピュアセレクト マヨネーズ ふわあま」のおいしさや世界観を体験してもらうことを目的に企画された。マヨネーズを料理の「脇役」ではなく「主役」として味わい尽くす仕掛けが随所に施されている。"}, {"tag": "p", "text": "同製品を味わい尽くすにあたり、会場装飾もこだわりが。オレンジとクリーム色をベースに、マヨネーズのコクとハチミツの甘みが溶け合う世界観を空間全体で表現している。"}, {"tag": "p", "text": "マヨネーズを“かけるもの”から“食べるもの”へアップデートした本イベントでは、提供するすべての食材を「マヨを食べるための棒＝マヨ棒」と定義。会場内で、来場者はランダムで食材が決まる「棒みくじ」を引き、出た結果に応じて2種類の「マヨ棒」を試食することができる。"}, {"tag": "p", "text": "マヨネーズがつけやすい棒状の食材を提供。マヨ棒には、「エビ×ブロッコリー」といった定番の組み合わせから、「バナナ×パンケーキ」「かぼちゃ×バナナ」といった意外な掛け合わせまで全14種類を用意した。また無料のスナック菓子のフリー棒も用意。"}, {"tag": "p", "text": "さらに、会場にはマヨネーズが自由におかわりできる装置「全自動無限マヨシステム」を設置。来場者が好きなだけ味わえる空間となっている。"}, {"tag": "p", "text": "全自動無限マヨシステム"}, {"tag": "p", "text": "同社によると、本イベントの来場者は900名を想定。開催前から注目を集め、用意していた事前予約枠はすでに満枠だという。今回、開催中にSNSなどで知った人でも参加できるよう、開催前日に空き枠を解放する「前日予約枠」も設けている。"}, {"tag": "p", "text": "さらに、イベントの開催に合わせて蕎麦店「なぜ蕎麦にラー油を入れるのか。」との期間限定コラボレーションも行う。公式SNSフォローで限定メニュー「ふわあま油蕎麦」の試食サイズを提供するほか、対象の3店舗では1週間限定でマヨジャック企画を実施する。全席に「ふわあま」を常置し、コラボポスターも掲示する。"}], "body_images": ["https://cdn.advertimes.com/wp-content/uploads/2026/11/ajinomoto-mayonnaise01.jpg", "https://cdn.advertimes.com/wp-content/uploads/2026/11/ajinomoto-mayonnaise02.jpg", "https://cdn.advertimes.com/wp-content/uploads/2026/11/ajinomoto-mayonnaise03.jpg", "https://cdn.advertimes.com/wp-content/uploads/2026/11/ajinomoto-mayonnaise04.jpg"], "page_count": 1, "is_locked": false, "full_text": "味の素は11月5日から8日までの4日間、東京・六本木ヒルズ カフェにて、体験型イベント「なぜマヨにハチミツを入れるのか。」を開催している（参加無料・事前予約制）。\n\n「ピュアセレクト マヨネーズ ふわあま」は、隠し味として「はちみつ」を使用している。\n\n本イベントは、同社が2026年8月に発売した「ピュアセレクト マヨネーズ ふわあま」のおいしさや世界観を体験してもらうことを目的に企画された。マヨネーズを料理の「脇役」ではなく「主役」として味わい尽くす仕掛けが随所に施されている。\n\n同製品を味わい尽くすにあたり、会場装飾もこだわりが。オレンジとクリーム色をベースに、マヨネーズのコクとハチミツの甘みが溶け合う世界観を空間全体で表現している。\n\nマヨネーズを“かけるもの”から“食べるもの”へアップデートした本イベントでは、提供するすべての食材を「マヨを食べるための棒＝マヨ棒」と定義。会場内で、来場者はランダムで食材が決まる「棒みくじ」を引き、出た結果に応じて2種類の「マヨ棒」を試食することができる。\n\nマヨネーズがつけやすい棒状の食材を提供。マヨ棒には、「エビ×ブロッコリー」といった定番の組み合わせから、「バナナ×パンケーキ」「かぼちゃ×バナナ」といった意外な掛け合わせまで全14種類を用意した。また無料のスナック菓子のフリー棒も用意。\n\nさらに、会場にはマヨネーズが自由におかわりできる装置「全自動無限マヨシステム」を設置。来場者が好きなだけ味わえる空間となっている。\n\n全自動無限マヨシステム\n\n同社によると、本イベントの来場者は900名を想定。開催前から注目を集め、用意していた事前予約枠はすでに満枠だという。今回、開催中にSNSなどで知った人でも参加できるよう、開催前日に空き枠を解放する「前日予約枠」も設けている。\n\nさらに、イベントの開催に合わせて蕎麦店「なぜ蕎麦にラー油を入れるのか。」との期間限定コラボレーションも行う。公式SNSフォローで限定メニュー「ふわあま油蕎麦」の試食サイズを提供するほか、対象の3店舗では1週間限定でマヨジャック企画を実施する。全席に「ふわあま」を常置し、コラボポスターも掲示する。", "topic": "味の素が六本木で無料体験イベント「なぜマヨにハチミツを入れるのか。」開催、棒みくじ×全自動無限マヨシステムで事前予約満枠", "stars": "⭐️⭐️", "sub_theme": "体験型イベント・サンプリング", "company": "味の素（ピュアセレクト マヨネーズ ふわあま）", "summary_3lines": ["味の素が8月発売の新商品「ピュアセレクト マヨネーズ ふわあま」の世界観を体験するイベントを11月5日〜8日に六本木ヒルズ カフェで開催し、事前予約900名枠が満枠に。", "マヨネーズを「かける脇役」から「食べる主役」へ再定義し、全14種の食材から抽選で試食する『棒みくじ（マヨ棒）』と『全自動無限マヨシステム』を設置。", "人気蕎麦店「なぜ蕎麦にラー油を入れるのか。」ともタイトル・店舗コラボし、限定『ふわあま油蕎麦』提供や3店舗での全席マヨジャックを展開。"], "key_insight": "「なぜ蕎麦にラー油を〜」のネーミングパロディ＆実店舗コラボと、「無限マヨシステム」「棒みくじ」というUGC映えする体験装置の掛け合わせが秀逸。", "fetched_at": "2026-11-08", "source_label": "宣伝会議 AdverTimes（マーケティング）"}, {"id": "563322", "date": "2026-11-06", "category": "マーケティング", "title": "「時のオカリナ」リメイク発売日にホワイトハウスが再び政治利用 「任天堂、訴えて」の声も 共和党は選挙で敗北も、トランプ大統領はゲームで大活躍？", "tags": ["#トランプ政権", "#ホワイトハウス"], "url": "https://www.advertimes.com/20261106/article563322/", "excerpt": "米ホワイトハウスが11月6日（日本時間）、任天堂の人気ゲーム「ゼルダの伝説」を模した動画を公式Xに投稿し、物議を醸している。投稿されたのは米...", "image": "https://cdn.advertimes.com/wp-content/uploads/2026/11/the-white-house_official-x_remake_the-legend-of-zelda_ogp1-1024x576.jpg", "paragraphs": [{"tag": "p", "text": "米ホワイトハウスが11月6日（日本時間）、任天堂の人気ゲーム「ゼルダの伝説」を模した動画を公式Xに投稿し、物議を醸している。投稿されたのは米国時間の11月5日で、同日に発売された「ゼルダの伝説 時のオカリナ」のリメイク版に合わせたものとみられる。"}, {"tag": "p", "text": "ゲームの主人公に代わってトランプ大統領が登場し、薬価引き下げや治安改善など、政権が主張する実績をゲーム内のメッセージとして紹介する内容。SNSでは「任天堂、訴えて」と法的措置を求める声のほか、動画の制作手法や政府の広報姿勢を批判する声が相次いでいる。"}, {"tag": "p", "text": "ホワイトハウスは9月にも同シリーズを模した動画を公開しており、今回が2度目となる。投稿された11月5日は、Nintendo Switch 2向けにフルリメイクされた「ゼルダの伝説 時のオカリナ」の発売日でもあり、人気ゲームの話題性と重なる形で政治的な情報発信が行われた。"}, {"tag": "p", "text": "ホワイトハウスが投稿した動画の一場面"}, {"tag": "h2", "text": "政権実績をゲームの「発見」に"}, {"tag": "p", "text": "今回投稿された44秒の動画は、「THE LEGEND OF TRUMP: MAKE AMERICA GREAT AGAIN」というタイトル画面から始まる。「ゼルダの伝説 時のオカリナ」の世界観を模した映像に、ローポリゴン調で描かれたトランプ大統領が登場。主人公の「リンク」に代わって赤い帽子をかぶったトランプ氏が現れ、帽子には「STILL YOUR PRESIDENT（まだあなたの大統領）」という文字が記されている。"}, {"tag": "p", "text": "It’s dangerous to go alone! Take this 🇺🇸 https://t.co/masCWWQe7m"}, {"tag": "p", "text": "— The White House (@WhiteHouse) November 5, 2026"}, {"tag": "p", "text": "トランプ氏は、主人公リンクの相棒である妖精「ナビィ」を思わせるキャラクターに導かれながら、森の中を冒険。画面上部にはハート型の体力ゲージや剣のアイコン、画面右下には地図が表示されるなど、実際のゲームを思わせる演出が随所に盛り込まれている。"}, {"tag": "p", "text": "特徴的なのは、ゲーム内でアイテムを発見した際のメッセージを使い、トランプ政権の実績を紹介している点だ。"}, {"tag": "p", "text": "画面には「最恵国待遇に基づく薬価設定を発見した」と表示され、処方薬価格が過去60年以上で最大の下落を記録したとアピール。続いて「アメリカを再び安全に！」という言葉とともに、殺人発生率が125年ぶりの低水準になったとする説明が登場する。"}, {"tag": "p", "text": "さらに「17カ月連続で不法移民を国内に釈放していない」と主張する場面もある。いずれも政権側が主張する成果を、ゲームの進行に合わせて提示する構成だ。"}, {"tag": "p", "text": "最後には、大統領執務室で書類に署名するトランプ氏の姿が映し出され、「トランプ大統領は、アメリカを再び偉大にするために休むことなく働いている」と強調して締めくくられる。"}, {"tag": "p", "text": "投稿文には「It’s dangerous to go alone! Take this（1人で行くのは危険だ。これを持っていけ）」と記されている。これは初代「ゼルダの伝説」に登場する有名なセリフを引用したものだ。"}, {"tag": "h2", "text": "「ホワイトハウスが笑いものに」批判相次ぐ"}, {"tag": "p", "text": "今回の動画に対して、Xでは批判や皮肉の声が相次いでいる。"}, {"tag": "p", "text": "特に目立つのが、任天堂に対応を求める声だ。任天堂の米国公式アカウントを指定し、「訴えてほしい」と法的措置を求めるコメントのほか、「アメリカに弁護士を一人か二人くらい雇っているだろう？」と、任天堂に訴訟を促すような書き込みも見られた。"}], "body_images": ["https://cdn.advertimes.com/wp-content/uploads/2026/11/the-white-house_official-x_remake_the-legend-of-zelda02.jpg"], "page_count": 2, "is_locked": true, "full_text": "米ホワイトハウスが11月6日（日本時間）、任天堂の人気ゲーム「ゼルダの伝説」を模した動画を公式Xに投稿し、物議を醸している。投稿されたのは米国時間の11月5日で、同日に発売された「ゼルダの伝説 時のオカリナ」のリメイク版に合わせたものとみられる。\n\nゲームの主人公に代わってトランプ大統領が登場し、薬価引き下げや治安改善など、政権が主張する実績をゲーム内のメッセージとして紹介する内容。SNSでは「任天堂、訴えて」と法的措置を求める声のほか、動画の制作手法や政府の広報姿勢を批判する声が相次いでいる。\n\nホワイトハウスは9月にも同シリーズを模した動画を公開しており、今回が2度目となる。投稿された11月5日は、Nintendo Switch 2向けにフルリメイクされた「ゼルダの伝説 時のオカリナ」の発売日でもあり、人気ゲームの話題性と重なる形で政治的な情報発信が行われた。\n\nホワイトハウスが投稿した動画の一場面\n\n政権実績をゲームの「発見」に\n\n今回投稿された44秒の動画は、「THE LEGEND OF TRUMP: MAKE AMERICA GREAT AGAIN」というタイトル画面から始まる。「ゼルダの伝説 時のオカリナ」の世界観を模した映像に、ローポリゴン調で描かれたトランプ大統領が登場。主人公の「リンク」に代わって赤い帽子をかぶったトランプ氏が現れ、帽子には「STILL YOUR PRESIDENT（まだあなたの大統領）」という文字が記されている。\n\nIt’s dangerous to go alone! Take this 🇺🇸 https://t.co/masCWWQe7m\n\n— The White House (@WhiteHouse) November 5, 2026\n\nトランプ氏は、主人公リンクの相棒である妖精「ナビィ」を思わせるキャラクターに導かれながら、森の中を冒険。画面上部にはハート型の体力ゲージや剣のアイコン、画面右下には地図が表示されるなど、実際のゲームを思わせる演出が随所に盛り込まれている。\n\n特徴的なのは、ゲーム内でアイテムを発見した際のメッセージを使い、トランプ政権の実績を紹介している点だ。\n\n画面には「最恵国待遇に基づく薬価設定を発見した」と表示され、処方薬価格が過去60年以上で最大の下落を記録したとアピール。続いて「アメリカを再び安全に！」という言葉とともに、殺人発生率が125年ぶりの低水準になったとする説明が登場する。\n\nさらに「17カ月連続で不法移民を国内に釈放していない」と主張する場面もある。いずれも政権側が主張する成果を、ゲームの進行に合わせて提示する構成だ。\n\n最後には、大統領執務室で書類に署名するトランプ氏の姿が映し出され、「トランプ大統領は、アメリカを再び偉大にするために休むことなく働いている」と強調して締めくくられる。\n\n投稿文には「It’s dangerous to go alone! Take this（1人で行くのは危険だ。これを持っていけ）」と記されている。これは初代「ゼルダの伝説」に登場する有名なセリフを引用したものだ。\n\n「ホワイトハウスが笑いものに」批判相次ぐ\n\n今回の動画に対して、Xでは批判や皮肉の声が相次いでいる。\n\n特に目立つのが、任天堂に対応を求める声だ。任天堂の米国公式アカウントを指定し、「訴えてほしい」と法的措置を求めるコメントのほか、「アメリカに弁護士を一人か二人くらい雇っているだろう？」と、任天堂に訴訟を促すような書き込みも見られた。", "topic": "米ホワイトハウス公式Xが『ゼルダの伝説 時のオカリナ』Switch 2リメイク発売日にトランプ氏登場の模倣動画を投稿し物議", "stars": "⭐️", "sub_theme": "SNS炎上・IP政治利用", "company": "米ホワイトハウス / 任天堂（言及）", "summary_3lines": ["米ホワイトハウス公式Xが11月5日（Nintendo Switch 2版『ゼルダの伝説 時のオカリナ』フルリメイク発売日）に、同作を模した44秒の政治PR動画を投稿。", "ローポリゴン調のトランプ大統領が主人公リンク代わりに登場し、薬価引き下げや治安改善などの政権実績をゲーム内の「アイテム発見メッセージ」風に演出。", "9月に続く2度目のゼルダ模倣投稿に対し、SNS上では「任天堂、訴えて」と法的措置を求める声や政府広報のリテラシーを疑問視する批判が殺到。"], "key_insight": "大型ゲームIPの発売日トレンドに便乗した公的機関のミーム広報が、ファンコミュニティの反発と著作権・ブランド毀損リスクを招いた象徴事例。", "fetched_at": "2026-11-08", "source_label": "宣伝会議 AdverTimes（マーケティング）"}];
+    let currentCat = 'ALL';
+    let currentTag = null;
+    let searchQuery = '';
+
+    function renderTags() {
+      const tagContainer = document.getElementById('tag-container');
+      const counts = {};
+      ARTICLES.forEach(a => {
+        (a.tags || []).forEach(t => { counts[t] = (counts[t] || 0) + 1; });
+      });
+      const allTags = Object.keys(counts);
+      let html = '<span class="text-xs font-semibold text-slate-400 mr-1">タグ絞り込み:</span>';
+      html += `<button data-tag="" class="tag-pill px-2.5 py-1 rounded-full text-xs font-medium transition ${!currentTag ? 'bg-indigo-600 text-white' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'}">すべて</button>`;
+      allTags.forEach(t => {
+        const active = currentTag === t;
+        html += `<button data-tag="${t}" class="tag-pill px-2.5 py-1 rounded-full text-xs font-medium transition ${active ? 'bg-indigo-600 text-white' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'}">${t}</button>`;
+      });
+      tagContainer.innerHTML = html;
+      tagContainer.querySelectorAll('.tag-pill').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const t = btn.getAttribute('data-tag');
+          currentTag = t ? t : null;
+          renderTags();
+          renderAll();
+        });
+      });
+    }
+
+    function getFiltered() {
+      return ARTICLES.filter(a => {
+        if (currentCat === 'STAR2' && a.stars !== '⭐️⭐️') return false;
+        if (currentCat !== 'ALL' && currentCat !== 'STAR2' && a.category !== currentCat) return false;
+        if (currentTag && !(a.tags || []).includes(currentTag)) return false;
+        if (searchQuery) {
+          const q = searchQuery.toLowerCase();
+          const hay = [
+            a.title, a.topic, a.company, a.sub_theme, a.key_insight,
+            ...(a.summary_3lines || []), ...(a.tags || []), a.full_text
+          ].join(' ').toLowerCase();
+          if (!hay.includes(q)) return false;
+        }
+        return true;
+      });
+    }
+
+    function renderAll() {
+      const items = getFiltered();
+      const cardsEl = document.getElementById('cards-view');
+      const tbodyEl = document.getElementById('sheet-tbody');
+
+      if (items.length === 0) {
+        cardsEl.innerHTML = `<div class="col-span-2 bg-white rounded-xl p-10 text-center border border-slate-200 text-slate-500 text-sm">条件に一致する記事がありません。検索条件をリセットしてください。</div>`;
+        tbodyEl.innerHTML = '';
+        return;
+      }
+
+      cardsEl.innerHTML = items.map(a => {
+        const isCreative = a.category === 'クリエイティブ';
+        const catBadge = isCreative
+          ? 'bg-indigo-50 text-indigo-700 border-indigo-200'
+          : 'bg-rose-50 text-rose-700 border-rose-200';
+        const bullets = (a.summary_3lines || []).map(b =>
+          `<li class="flex items-start gap-2 text-xs text-slate-700 leading-relaxed">
+            <span class="mt-1.5 w-1.5 h-1.5 rounded-full bg-indigo-500 shrink-0"></span>
+            <span>${b}</span>
+          </li>`
+        ).join('');
+        const tagsHtml = (a.tags || []).map(t =>
+          `<span class="px-2 py-0.5 rounded-md bg-slate-100 text-slate-600 text-xs font-medium">${t}</span>`
+        ).join('');
+
+        return `
+        <article class="bg-white rounded-2xl border border-slate-200 shadow-2xs hover:shadow-md transition flex flex-col overflow-hidden">
+          <div class="relative h-48 bg-slate-100 overflow-hidden">
+            <img src="${a.image}" alt="" class="w-full h-full object-cover" onerror="this.style.display='none'" />
+            <div class="absolute top-3 left-3 flex flex-wrap items-center gap-1.5">
+              <span class="px-2.5 py-1 rounded-full text-xs font-bold border shadow-2xs backdrop-blur-xs bg-white/95 ${catBadge}">
+                ${a.category}
+              </span>
+              <span class="px-2.5 py-1 rounded-full text-xs font-semibold bg-slate-900/80 text-white backdrop-blur-xs">
+                ${a.sub_theme || ''}
+              </span>
+            </div>
+            <div class="absolute top-3 right-3 px-2.5 py-1 rounded-full text-xs font-bold bg-white/95 text-slate-800 shadow-2xs">
+              ${a.stars || '⭐️'}
+            </div>
+            <div class="absolute bottom-2 right-3 px-2 py-0.5 rounded bg-slate-900/75 text-white text-xs font-medium">
+              公開日: ${a.date}
+            </div>
+          </div>
+
+          <div class="p-5 flex-1 flex flex-col justify-between space-y-4">
+            <div class="space-y-3">
+              <div class="text-xs font-bold text-indigo-700">${a.company || ''}</div>
+              <h2 class="text-base font-extrabold text-slate-900 leading-snug">
+                ${a.title}
+              </h2>
+
+              <!-- Spreadsheet Topic Box -->
+              <div class="p-3 rounded-xl bg-slate-50 border border-slate-200/80">
+                <div class="text-xs font-bold text-slate-500 mb-1">📋 スプシ蓄積トピック（1行要約）</div>
+                <p class="text-xs font-bold text-slate-900 leading-relaxed">${a.topic}</p>
+              </div>
+
+              <!-- 3-line Summary -->
+              <div class="space-y-1.5">
+                <div class="text-xs font-bold text-slate-500">💡 記事のポイント（3行まとめ）</div>
+                <ul class="space-y-1.5">${bullets}</ul>
+              </div>
+
+              <!-- Key Insight -->
+              <div class="p-3 rounded-xl bg-amber-50/70 border border-amber-200/80">
+                <div class="text-xs font-bold text-amber-900">🎯 企画・マーケ視点の注目ポイント</div>
+                <p class="text-xs text-amber-950 mt-0.5 leading-relaxed">${a.key_insight || ''}</p>
+              </div>
+            </div>
+
+            <div class="pt-3 border-t border-slate-100 space-y-3">
+              <div class="flex flex-wrap gap-1.5">${tagsHtml}</div>
+              <div class="flex items-center justify-between gap-2">
+                <button
+                  onclick="openArticleModal('${a.id}')"
+                  class="flex-1 py-2 px-3 rounded-lg text-xs font-bold bg-indigo-50 hover:bg-indigo-100 text-indigo-800 transition text-center"
+                >
+                  本文テキスト・画像を見る（全${a.paragraphs.length}段落）
+                </button>
+                <a
+                  href="${a.url}"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="py-2 px-3 rounded-lg text-xs font-semibold bg-slate-100 hover:bg-slate-200 text-slate-700 transition"
+                >
+                  元記事 ↗
+                </a>
+              </div>
+            </div>
+          </div>
+        </article>`;
+      }).join('');
+
+      tbodyEl.innerHTML = items.map(a => `
+        <tr class="hover:bg-slate-50 transition">
+          <td class="py-3 px-3 whitespace-nowrap font-medium text-slate-700">${a.date}</td>
+          <td class="py-3 px-3 whitespace-nowrap">
+            <span class="px-2 py-0.5 rounded-full text-xs font-bold ${a.category === 'クリエイティブ' ? 'bg-indigo-50 text-indigo-700' : 'bg-rose-50 text-rose-700'}">
+              ${a.category}
+            </span>
+          </td>
+          <td class="py-3 px-3 font-bold text-slate-900 leading-relaxed">${a.topic}</td>
+          <td class="py-3 px-3 whitespace-nowrap">${a.stars || '⭐️'}</td>
+          <td class="py-3 px-3 text-slate-600 leading-relaxed">
+            <a href="${a.url}" target="_blank" class="text-indigo-600 hover:underline font-medium">
+              宣伝会議 AdverTimes『${a.title}』
+            </a>
+          </td>
+          <td class="py-3 px-3 whitespace-nowrap text-slate-500">${a.fetched_at}</td>
+          <td class="py-3 px-3 text-slate-500">${(a.tags || []).join(' ')}</td>
+          <td class="py-3 px-3 whitespace-nowrap">
+            <button onclick="openArticleModal('${a.id}')" class="px-2.5 py-1 rounded bg-indigo-50 text-indigo-700 font-bold hover:bg-indigo-100">
+              詳細
+            </button>
+          </td>
+        </tr>
+      `).join('');
+    }
+
+    window.openArticleModal = function(id) {
+      const a = ARTICLES.find(x => x.id === id);
+      if (!a) return;
+      document.getElementById('modal-title').textContent = a.title;
+      document.getElementById('modal-badges').innerHTML = `
+        <span class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-indigo-100 text-indigo-800">${a.category}</span>
+        <span class="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-slate-200 text-slate-700">${a.sub_theme || ''}</span>
+        <span class="text-xs text-slate-500">公開日: ${a.date}</span>
+      `;
+      document.getElementById('modal-link').href = a.url;
+      document.getElementById('modal-meta').textContent = `記事ID: ${a.id} | 取得日: ${a.fetched_at}`;
+
+      const imgs = (a.body_images || []).map(src =>
+        `<img src="${src}" alt="" class="rounded-xl border border-slate-200 max-h-60 object-cover" onerror="this.style.display='none'" />`
+      ).join('');
+
+      const paras = (a.paragraphs || []).map(p => {
+        if (p.tag === 'h2' || p.tag === 'h3') {
+          return `<h4 class="text-base font-bold text-slate-900 pt-3 border-t border-slate-100">${p.text}</h4>`;
+        }
+        return `<p class="text-sm text-slate-700 leading-relaxed">${p.text}</p>`;
+      }).join('');
+
+      document.getElementById('modal-body').innerHTML = `
+        <div class="p-4 rounded-xl bg-slate-50 border border-slate-200 space-y-2">
+          <div class="text-xs font-bold text-indigo-700">📋 スプシ蓄積トピック</div>
+          <div class="text-sm font-bold text-slate-900">${a.topic}</div>
+          <div class="text-xs font-bold text-amber-800 pt-1">🎯 注目インサイト</div>
+          <div class="text-xs text-slate-700">${a.key_insight || ''}</div>
+        </div>
+        ${imgs ? `<div class="flex gap-3 overflow-x-auto py-2">${imgs}</div>` : ''}
+        <div class="space-y-3">${paras}</div>
+      `;
+      document.getElementById('article-modal').classList.remove('hidden');
+    };
+
+    document.getElementById('modal-close').addEventListener('click', () => {
+      document.getElementById('article-modal').classList.add('hidden');
+    });
+    document.getElementById('article-modal').addEventListener('click', (e) => {
+      if (e.target.id === 'article-modal') {
+        document.getElementById('article-modal').classList.add('hidden');
+      }
+    });
+
+    document.querySelectorAll('.cat-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        currentCat = btn.getAttribute('data-cat');
+        document.querySelectorAll('.cat-btn').forEach(b => {
+          b.className = 'cat-btn px-3.5 py-2 rounded-lg text-xs font-bold bg-slate-100 text-slate-700 hover:bg-slate-200 transition';
+        });
+        btn.className = 'cat-btn px-3.5 py-2 rounded-lg text-xs font-bold bg-slate-900 text-white transition';
+        renderAll();
+      });
+    });
+
+    document.getElementById('search-input').addEventListener('input', (e) => {
+      searchQuery = e.target.value.trim();
+      renderAll();
+    });
+
+    const cardsBtn = document.getElementById('view-cards-btn');
+    const sheetBtn = document.getElementById('view-sheet-btn');
+    cardsBtn.addEventListener('click', () => {
+      document.getElementById('cards-view').classList.remove('hidden');
+      document.getElementById('sheet-view').classList.add('hidden');
+      cardsBtn.className = 'px-3 py-1.5 rounded-md text-xs font-bold bg-white text-slate-900 shadow-2xs transition';
+      sheetBtn.className = 'px-3 py-1.5 rounded-md text-xs font-bold text-slate-600 hover:text-slate-900 transition';
+    });
+    sheetBtn.addEventListener('click', () => {
+      document.getElementById('cards-view').classList.add('hidden');
+      document.getElementById('sheet-view').classList.remove('hidden');
+      sheetBtn.className = 'px-3 py-1.5 rounded-md text-xs font-bold bg-white text-slate-900 shadow-2xs transition';
+      cardsBtn.className = 'px-3 py-1.5 rounded-md text-xs font-bold text-slate-600 hover:text-slate-900 transition';
+    });
+
+    document.getElementById('copy-tsv-btn').addEventListener('click', () => {
+      const rows = getFiltered().map(a => [
+        a.date, a.category, a.topic, a.url,
+        `宣伝会議 AdverTimes『${a.title}』`, a.stars || '⭐️', a.fetched_at,
+        (a.tags || []).join(' '), 'FALSE', 'FALSE', 'FALSE', 'FALSE'
+      ].join('\t'));
+      navigator.clipboard.writeText(rows.join('\n'));
+      const btn = document.getElementById('copy-tsv-btn');
+      btn.textContent = 'コピーしました！';
+      setTimeout(() => { btn.textContent = 'TSVをクリップボードにコピー'; }, 2000);
+    });
+
+    renderTags();
+    renderAll();
+  </script>
+</body>
+</html>
